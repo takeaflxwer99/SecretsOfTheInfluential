@@ -11,6 +11,6 @@ public class Prueba : MonoBehaviour, IInteractable
     }
     public string GetDescription()
     {
-        return "si";
+        return "E to interact";
     }
 }

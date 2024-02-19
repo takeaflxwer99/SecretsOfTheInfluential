@@ -2,40 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
-    [SerializeField] private Rigidbody _rb;
-    [SerializeField] private float _speed = 5;
-    [SerializeField] private float _turnSpeed = 360;
-    [SerializeField] private Transform _model;
-    private Vector3 _input;
-
-    private void Update() {
-        GatherInput();
-        Look();
-    }
-
-    private void FixedUpdate() {
-        Move();
-    }
-
-    private void GatherInput() {
-        _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-    }
-
-    private void Look() {
-        if (_input == Vector3.zero) return;
-
-        Quaternion rot = Quaternion.LookRotation(_input.ToIso(), Vector3.up);
-        _model.rotation = Quaternion.RotateTowards(_model.rotation, rot, _turnSpeed * Time.deltaTime);
-    }
-
-    private void Move() {
-        _rb.MovePosition(transform.position + _input.ToIso() * _input.normalized.magnitude * _speed * Time.deltaTime);
-    }
-}
-
-public static class Helpers 
+public class PlayerController : MonoBehaviour
 {
-    private static Matrix4x4 _isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
-    public static Vector3 ToIso(this Vector3 input) => _isoMatrix.MultiplyPoint3x4(input);
+    [SerializeField] private float speed = 1f;
+    [SerializeField] private float turnSpeed = 10f;
+    public Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponentInChildren<Animator>();
+    }
+
+    private void Update()
+    {
+        HandleMovementInput();
+    }
+
+    private void HandleMovementInput()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        // Corrige la dirección del input
+        Vector3 inputDirection = new Vector3(horizontal, 0f, -vertical).normalized;
+
+        if (inputDirection.magnitude > 0.1f)
+        {
+            // Corrige la rotación hacia la dirección de movimiento
+            float targetAngle = Mathf.Atan2(inputDirection.z, inputDirection.x) * Mathf.Rad2Deg;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSpeed, 0.1f);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            // Mueve al jugador en la dirección de movimiento
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
+            // Activa la animación de movimiento
+            animator.SetBool("IsMoving", true);
+        }
+        else
+        {
+            // Desactiva la animación de movimiento cuando no se está moviendo
+            animator.SetBool("IsMoving", false);
+        }
+    }
 }
