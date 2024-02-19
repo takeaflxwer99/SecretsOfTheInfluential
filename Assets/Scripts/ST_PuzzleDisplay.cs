@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class ST_PuzzleDisplay : MonoBehaviour 
 {
@@ -200,8 +201,8 @@ public class ST_PuzzleDisplay : MonoBehaviour
 		if(Complete)
 		{
 			Debug.Log("Puzzle Complete!");
-			//Volver a escena principal
-		}
+            SceneManager.LoadSceneAsync(2);
+        }
 
 		yield return null;
 	}

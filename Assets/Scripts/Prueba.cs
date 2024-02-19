@@ -7,7 +7,7 @@ public class Prueba : MonoBehaviour, IInteractable
 {
     public void Interact()
     {
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadSceneAsync(3);
     }
     public string GetDescription()
     {

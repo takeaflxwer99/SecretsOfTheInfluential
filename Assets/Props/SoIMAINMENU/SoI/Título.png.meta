@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -97,7 +97,7 @@ TextureImporter:
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 74
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -121,7 +121,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: "T\xEDtulo_0"
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 657
+        width: 1233
+        height: 207
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1797e16f891ad1b42a96b40ec7abed30
+      internalID: 75437723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "T\xEDtulo_1"
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 670
+        width: 119
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90d14418367837543b8906c2cdac0069
+      internalID: -812415979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "T\xEDtulo_2"
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 721
+        width: 142
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 154a92c2d3e7a0d4395b3b1f7d62d245
+      internalID: -334688960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "T\xEDtulo_3"
+      rect:
+        serializedVersion: 2
+        x: 1017
+        y: 670
+        width: 571
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b294556da835294f9869a5d56adff51
+      internalID: -794803957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +216,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "T\xEDtulo_0": 75437723
+      "T\xEDtulo_1": -812415979
+      "T\xEDtulo_2": -334688960
+      "T\xEDtulo_3": -794803957
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
