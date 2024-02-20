@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Prueba : MonoBehaviour, IInteractable
+public class Interact8Puzzle : MonoBehaviour, IInteractable
 {
     public void Interact()
     {

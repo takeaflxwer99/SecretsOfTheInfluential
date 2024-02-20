@@ -201,7 +201,7 @@ public class ST_PuzzleDisplay : MonoBehaviour
 		if(Complete)
 		{
 			Debug.Log("Puzzle Complete!");
-            SceneManager.LoadSceneAsync(2);
+            SceneManager.LoadSceneAsync(1);
         }
 
 		yield return null;

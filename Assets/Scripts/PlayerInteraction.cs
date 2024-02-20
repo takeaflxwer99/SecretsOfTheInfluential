@@ -5,13 +5,11 @@ using TMPro;
 
 public class PlayerInteraction : MonoBehaviour
 {
-
     public Camera mainCam;
     public float interactionDistance = 2f;
 
     public GameObject interactionUI;
     public TextMeshProUGUI interactionText;
-
 
     private void Update()
     {
@@ -24,6 +22,9 @@ public class PlayerInteraction : MonoBehaviour
         RaycastHit hit;
 
         bool hitSomething = false;
+
+        // Dibujar el rayo en la escena para depuración
+        Debug.DrawRay(ray.origin, ray.direction * interactionDistance, Color.blue);
 
         if (Physics.Raycast(ray, out hit, interactionDistance))
         {
