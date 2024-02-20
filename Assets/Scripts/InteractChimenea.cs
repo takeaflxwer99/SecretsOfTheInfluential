@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class InteractChimenea : MonoBehaviour
+public class InteractChimenea : MonoBehaviour, IInteractable
 {
     public void Interact()
     {
