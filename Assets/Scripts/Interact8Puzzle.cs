@@ -7,7 +7,7 @@ public class Interact8Puzzle : MonoBehaviour, IInteractable
 {
     public void Interact()
     {
-        SceneManager.LoadSceneAsync(3);
+        SceneManager.LoadSceneAsync(2);
     }
     public string GetDescription()
     {

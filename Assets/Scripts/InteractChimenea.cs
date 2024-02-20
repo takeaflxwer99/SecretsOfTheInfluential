@@ -7,7 +7,7 @@ public class InteractChimenea : MonoBehaviour, IInteractable
 {
     public void Interact()
     {
-        SceneManager.LoadSceneAsync(4);
+        SceneManager.LoadSceneAsync(3);
     }
     public string GetDescription()
     {
