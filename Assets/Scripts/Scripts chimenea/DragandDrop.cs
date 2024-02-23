@@ -39,9 +39,9 @@ public class DragandDrop : MonoBehaviour
         { objeto.transform.position = Objetoenposicion; }
     }
                 
-      public void Ganar()
-    {
-        if (establoqueado)
-        { popup.gameObject.SetActive(true); }
-    }
+    //  public void Ganar()
+    //{
+    //    if (establoqueado)
+    //    { popup.gameObject.SetActive(true); }
+    //}
 }
