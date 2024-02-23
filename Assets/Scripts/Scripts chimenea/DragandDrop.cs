@@ -9,9 +9,12 @@ public class DragandDrop : MonoBehaviour
     public float distancia;
     public bool establoqueado;
     public GameObject popup;
-    
-
     Vector2 Objetoenposicion;
+    
+    
+    
+    
+    
 
     // Start is called before the first frame update
     void Start()
