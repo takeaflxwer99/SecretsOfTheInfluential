@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -8,6 +9,7 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenu;
     public bool isPaused;
+    public AudioMixer mixer;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +39,7 @@ public class PauseMenu : MonoBehaviour
     public void PauseGame()
     {
         pauseMenu.SetActive(true);
+        mixer.SetFloat("Lowpass", 500f);
         Time.timeScale = 0f;
         isPaused = true;
     }
@@ -44,6 +47,7 @@ public class PauseMenu : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
+        mixer.SetFloat("Lowpass", 22000f);
         Time.timeScale = 1f;
         isPaused = false;
     }
