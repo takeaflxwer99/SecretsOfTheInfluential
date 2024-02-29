@@ -11,4 +11,9 @@ public class PlayGame : MonoBehaviour
         SceneManager.LoadSceneAsync("SampleScene");
 
     }
+
+    public void Cinematica()
+    {
+        SceneManager.LoadSceneAsync("Cinematica");
+    }
 }
