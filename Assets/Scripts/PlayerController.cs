@@ -54,6 +54,9 @@
 //        }
 //    }
 //}
+
+//ESTE DE ABAJO ES EL BUENO QUE SI FUNCIONA
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
