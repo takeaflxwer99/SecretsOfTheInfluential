@@ -20,11 +20,12 @@ public class Puzzlecompletado : MonoBehaviour
         {
             objetosEnPosicionInicial[i] = objetos[i].transform.position;
         }
-        
+
     }
 
     void Update()
-    { if (!Juegoterminado)
+    {
+        if (!Juegoterminado)
         {  // Verificar si todos los objetos están en la posición correcta
             bool todosBloqueados = true;
             foreach (DragandDrop bloqueado in objetos)
@@ -46,15 +47,16 @@ public class Puzzlecompletado : MonoBehaviour
     public void Ganar()
     {
         Juegoterminado = true;
-        popup.SetActive(true); 
-       StartCoroutine (SpawnDelay());
+        popup.SetActive(true);
+        StartCoroutine(SpawnDelay());
     }
     public IEnumerator SpawnDelay()
-    { 
-            yield return new WaitForSeconds(10);
+    {
+        yield return new WaitForSeconds(5);
         PlayerPrefs.SetInt("JuegoTerminado", Juegoterminado ? 1 : 0);
-        SceneManager.LoadSceneAsync("SampleScene");}
-  
+        SceneManager.LoadSceneAsync("SampleScene");
+    }
+
 
     // Método para comprobar si todos los objetos están en la posición correcta
     //public void ComprobarPosiciones()

@@ -9,6 +9,7 @@ public class DialogueManager : MonoBehaviour
     public Dialogue dialogue;
     public Text npcNameText;
     public Text dialogueText;
+    public GameObject dialoguePanel;
     Logger logger;
     public bool canLogDebugMessages = true;
     //Keep track of all sentences in our dialogue
@@ -47,6 +48,7 @@ public class DialogueManager : MonoBehaviour
         {
             // End the dialogue
             EndDialogue();
+            dialoguePanel.SetActive(false);
         }
         else
         {
