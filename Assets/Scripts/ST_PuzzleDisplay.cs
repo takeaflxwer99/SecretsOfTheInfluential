@@ -3,68 +3,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-public class ST_PuzzleDisplay : MonoBehaviour 
+public class ST_PuzzleDisplay : MonoBehaviour
 {
-	public Texture PuzzleImage;
+    public Texture PuzzleImage;
+    public AudioClip moveSound; // Agregar referencia al audio
 
-	public int Height = 3;
-	public int Width  = 3;
+    public int Height = 3;
+    public int Width = 3;
 
+    public Vector3 PuzzleScale = new Vector3(1.0f, 1.0f, 1.0f);
+    public Vector3 PuzzlePosition = new Vector3(0.0f, 0.0f, 0.0f);
+    public float SeperationBetweenTiles = 0f;
+    public GameObject Tile;
 
-	public Vector3 PuzzleScale = new Vector3(1.0f, 1.0f, 1.0f);
-	public Vector3 PuzzlePosition = new Vector3(0.0f, 0.0f, 0.0f);
-	public float SeperationBetweenTiles = 0f;
-	public GameObject Tile;
+    public Shader PuzzleShader;
 
-	public Shader PuzzleShader;
+    private GameObject[,] TileDisplayArray;
+    private List<Vector3> DisplayPositions = new List<Vector3>();
 
-	private GameObject[,] TileDisplayArray;
-	private List<Vector3>  DisplayPositions = new List<Vector3>();
+    private Vector3 Scale;
+    private Vector3 Position;
 
-	private Vector3 Scale;
-	private Vector3 Position;
+    public bool Complete = false;
 
+    void Start()
+    {
+        CreatePuzzleTiles();
+        StartCoroutine(JugglePuzzle());
+    }
 
-	public bool Complete = false;
+    // Update is called once per frame
+    void Update()
+    {
+        this.transform.localPosition = PuzzlePosition;
+        this.transform.localScale = PuzzleScale;
+    }
 
+    public Vector3 GetTargetLocation(ST_PuzzleTile thisTile)
+    {
+        ST_PuzzleTile MoveTo = CheckIfWeCanMove((int)thisTile.GridLocation.x, (int)thisTile.GridLocation.y, thisTile);
 
-	void Start () 
-	{
+        if (MoveTo != thisTile)
+        {
+            Vector3 TargetPos = MoveTo.TargetPosition;
+            Vector2 GridLocation = thisTile.GridLocation;
+            thisTile.GridLocation = MoveTo.GridLocation;
 
-		CreatePuzzleTiles();
+            MoveTo.LaunchPositionCoroutine(thisTile.TargetPosition);
+            MoveTo.GridLocation = GridLocation;
 
-		StartCoroutine(JugglePuzzle());
+            // Reproducir el sonido de movimiento
+            if (moveSound != null)
+                AudioSource.PlayClipAtPoint(moveSound, transform.position);
 
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		this.transform.localPosition = PuzzlePosition;
+            return TargetPos;
+        }
 
-		this.transform.localScale = PuzzleScale;
-	}
+        return thisTile.TargetPosition;
+    }
 
-	public Vector3 GetTargetLocation(ST_PuzzleTile thisTile)
-	{
-		ST_PuzzleTile MoveTo = CheckIfWeCanMove((int)thisTile.GridLocation.x, (int)thisTile.GridLocation.y, thisTile);
-
-		if(MoveTo != thisTile)
-		{
-			Vector3 TargetPos = MoveTo.TargetPosition;
-			Vector2 GridLocation = thisTile.GridLocation;
-			thisTile.GridLocation = MoveTo.GridLocation;
-
-			MoveTo.LaunchPositionCoroutine(thisTile.TargetPosition);
-			MoveTo.GridLocation = GridLocation;
-
-			return TargetPos;
-		}
-
-		return thisTile.TargetPosition;
-	}
-
-	private ST_PuzzleTile CheckMoveLeft(int Xpos, int Ypos, ST_PuzzleTile thisTile)
+    private ST_PuzzleTile CheckMoveLeft(int Xpos, int Ypos, ST_PuzzleTile thisTile)
 	{
 		if((Xpos - 1)  >= 0)
 		{
