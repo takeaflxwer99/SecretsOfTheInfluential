@@ -10,7 +10,7 @@ public class Puzzlecompletado : MonoBehaviour
     public float distancia;
     public GameObject popup;
 
-    private bool Juegoterminado;
+    private bool Juegoterminado = false;
     private Vector2[] objetosEnPosicionInicial;
 
     void Start()
@@ -52,6 +52,7 @@ public class Puzzlecompletado : MonoBehaviour
     public IEnumerator SpawnDelay()
     { 
             yield return new WaitForSeconds(10);
+        PlayerPrefs.SetInt("JuegoTerminado", Juegoterminado ? 1 : 0);
         SceneManager.LoadSceneAsync("SampleScene");}
   
 
