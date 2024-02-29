@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class SaveExample : MonoBehaviour
 {
- 
-    private void SaveGame()
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F5))
+            SaveGame();
+        if(Input.GetKeyUp(KeyCode.L))
+            LoadGame();
+    }
+
+
+    public void SaveGame()
     {
 
         SaveData saveData = new SaveData();
@@ -17,7 +25,7 @@ public class SaveExample : MonoBehaviour
         SaveManager.SaveGameState(saveData);
     }
 
-    private void LoadGame()
+    public void LoadGame()
     {
         SaveData saveData = SaveManager.LoadGameState();
         if(saveData != null)
