@@ -14,7 +14,14 @@ public class Cinematica : MonoBehaviour
         StartCoroutine(InicioEscritura());
     }
 
-    IEnumerator InicioEscritura()
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadSceneAsync("SampleScene");
+        }
+    }
+        IEnumerator InicioEscritura()
     {
         yield return StartCoroutine(typeWriter.TypeWriterString("En la opulenta mansión Whitewood, Charles Shepherd reemplaza a su hermano en una crucial cena de negocios. Un detective privado en un mundo de magnates, Charles enfrenta un entorno incómodo. Invitados llegan, cada uno con su propia historia: William Davies, entusiasta; los recién casados James y Jessie; Noah, simpático y misterioso; Jessica Mortone, distante pero intrigante; Arnold, un cliente pasado con un oscuro pasado. Grace, elegante y enigmática, capta la atención de Charles.", textMesh));
 

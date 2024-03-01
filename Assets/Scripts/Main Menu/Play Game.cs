@@ -5,11 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class PlayGame : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public void InicializarDesdeBoton()
+    {
+        Inicializar();
+    }
+
+    private void Inicializar()
+    {
+        SaveData saveData = SaveManager.LoadGameState();
+
+        if (saveData == null)
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
+    }
+
     public void PlayButton()
     {
         SceneManager.LoadSceneAsync("SampleScene");
-
     }
 
     public void Cinematica()

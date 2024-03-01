@@ -4,8 +4,20 @@ using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-public static class SaveManager
+public class SaveManager : MonoBehaviour
 {
+    private static SaveManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+    }
+
     public static void SaveGameState(SaveData saveData)
     {
         BinaryFormatter binaryFormatter = new BinaryFormatter();
@@ -29,10 +41,9 @@ public static class SaveManager
             }
             catch
             {
-
+                Debug.LogWarning("Error al cargar datos guardados.");
             }
-            
         }
-            return null;  
+        return null;
     }
 }
