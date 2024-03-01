@@ -23,6 +23,7 @@ public class SaveExample : MonoBehaviour
         saveData.positions[0].y= transform.position.y;
         saveData.positions[0].z = transform.position.z;
         SaveManager.SaveGameState(saveData);
+        Debug.Log("Has guaradado");
     }
 
     public void LoadGame()
@@ -30,11 +31,12 @@ public class SaveExample : MonoBehaviour
         SaveData saveData = SaveManager.LoadGameState();
         if(saveData != null)
         {
-            transform.position=new Vector3(saveData.positions[0].x, saveData.positions[0].y, saveData.positions[0].z);
+            transform.position = new Vector3(saveData.positions[0].x, saveData.positions[0].y, saveData.positions[0].z);
+            Debug.Log("Has cargado tu partida");
 
         }
 
-        
+
 
     }
 
