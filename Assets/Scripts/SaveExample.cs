@@ -33,11 +33,7 @@ public class SaveExample : MonoBehaviour
         SaveData saveData = SaveManager.LoadGameState();
         if (saveData != null)
         {
-    
             transform.position = new Vector3(saveData.positions[0].x, saveData.positions[0].y, saveData.positions[0].z);
-
-            UnityEngine.SceneManagement.SceneManager.LoadScene(saveData.currentScene);
-
             Debug.Log("Has cargado tu partida");
         }
     }

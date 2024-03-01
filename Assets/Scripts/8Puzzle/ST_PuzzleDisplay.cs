@@ -63,207 +63,207 @@ public class ST_PuzzleDisplay : MonoBehaviour
     }
 
     private ST_PuzzleTile CheckMoveLeft(int Xpos, int Ypos, ST_PuzzleTile thisTile)
-	{
-		if((Xpos - 1)  >= 0)
-		{
-			// esta la posición usada?
-			return GetTileAtThisGridLocation(Xpos - 1, Ypos, thisTile);
-		}
-		
-		return thisTile;
-	}
-	
-	private ST_PuzzleTile CheckMoveRight(int Xpos, int Ypos, ST_PuzzleTile thisTile)
-	{
-		if((Xpos + 1)  < Width)
-		{
-			return GetTileAtThisGridLocation(Xpos + 1, Ypos , thisTile);
-		}
-		
-		return thisTile;
-	}
-	
-	private ST_PuzzleTile CheckMoveDown(int Xpos, int Ypos, ST_PuzzleTile thisTile)
-	{
-		if((Ypos - 1)  >= 0)
-		{
-			return GetTileAtThisGridLocation(Xpos, Ypos  - 1, thisTile);
-		}
-		
-		return thisTile;
-	}
-	
-	private ST_PuzzleTile CheckMoveUp(int Xpos, int Ypos, ST_PuzzleTile thisTile)
-	{
-		if((Ypos + 1)  < Height)
-		{
-			return GetTileAtThisGridLocation(Xpos, Ypos  + 1, thisTile);
-		}
-		
-		return thisTile;
-	}
-	
-	private ST_PuzzleTile CheckIfWeCanMove(int Xpos, int Ypos, ST_PuzzleTile thisTile)
-	{
-		if(CheckMoveLeft(Xpos, Ypos, thisTile) != thisTile)
-		{
-			return CheckMoveLeft(Xpos, Ypos, thisTile);
-		}
-		
-		if(CheckMoveRight(Xpos, Ypos, thisTile) != thisTile)
-		{
-			return CheckMoveRight(Xpos, Ypos, thisTile);
-		}
-		
-		if(CheckMoveDown(Xpos, Ypos, thisTile) != thisTile)
-		{
-			return CheckMoveDown(Xpos, Ypos, thisTile);
-		}
-		
-		if(CheckMoveUp(Xpos, Ypos, thisTile) != thisTile)
-		{
-			return CheckMoveUp(Xpos, Ypos, thisTile);
-		}
+    {
+        if ((Xpos - 1) >= 0)
+        {
+            // esta la posición usada?
+            return GetTileAtThisGridLocation(Xpos - 1, Ypos, thisTile);
+        }
 
-		return thisTile;
-	}
+        return thisTile;
+    }
 
-	private ST_PuzzleTile GetTileAtThisGridLocation(int x, int y, ST_PuzzleTile thisTile)
-	{
-		for(int j = Height - 1; j >= 0; j--)
-		{
-			for(int i = 0; i < Width; i++)
-			{
-				if((TileDisplayArray[i,j].GetComponent<ST_PuzzleTile>().GridLocation.x == x)&&
-				   (TileDisplayArray[i,j].GetComponent<ST_PuzzleTile>().GridLocation.y == y))
-				{
-					if(TileDisplayArray[i,j].GetComponent<ST_PuzzleTile>().Active == false)
-					{
-						return TileDisplayArray[i,j].GetComponent<ST_PuzzleTile>();
-					}
-				}
-			}
-		}
+    private ST_PuzzleTile CheckMoveRight(int Xpos, int Ypos, ST_PuzzleTile thisTile)
+    {
+        if ((Xpos + 1) < Width)
+        {
+            return GetTileAtThisGridLocation(Xpos + 1, Ypos, thisTile);
+        }
 
-		return thisTile;
-	}
+        return thisTile;
+    }
 
-	private IEnumerator JugglePuzzle()
-	{
-		yield return new WaitForSeconds(1.0f);
+    private ST_PuzzleTile CheckMoveDown(int Xpos, int Ypos, ST_PuzzleTile thisTile)
+    {
+        if ((Ypos - 1) >= 0)
+        {
+            return GetTileAtThisGridLocation(Xpos, Ypos - 1, thisTile);
+        }
 
-		// ocultar una pieza
-		TileDisplayArray[0,0].GetComponent<ST_PuzzleTile>().Active = false;
+        return thisTile;
+    }
 
-		yield return new WaitForSeconds(1.0f);
+    private ST_PuzzleTile CheckMoveUp(int Xpos, int Ypos, ST_PuzzleTile thisTile)
+    {
+        if ((Ypos + 1) < Height)
+        {
+            return GetTileAtThisGridLocation(Xpos, Ypos + 1, thisTile);
+        }
 
-		for(int k = 0; k < 20; k++)
-		{
-			// posicionar random cada pieza
-			for(int j = 0; j < Height; j++)
-			{
-				for(int i = 0; i < Width; i++)
-				{		
-					TileDisplayArray[i,j].GetComponent<ST_PuzzleTile>().ExecuteAdditionalMove();
+        return thisTile;
+    }
 
-					yield return new WaitForSeconds(0.02f);
-				}
-			}
-		}
+    private ST_PuzzleTile CheckIfWeCanMove(int Xpos, int Ypos, ST_PuzzleTile thisTile)
+    {
+        if (CheckMoveLeft(Xpos, Ypos, thisTile) != thisTile)
+        {
+            return CheckMoveLeft(Xpos, Ypos, thisTile);
+        }
 
-		StartCoroutine(CheckForComplete());
+        if (CheckMoveRight(Xpos, Ypos, thisTile) != thisTile)
+        {
+            return CheckMoveRight(Xpos, Ypos, thisTile);
+        }
 
-		yield return null;
-	}
+        if (CheckMoveDown(Xpos, Ypos, thisTile) != thisTile)
+        {
+            return CheckMoveDown(Xpos, Ypos, thisTile);
+        }
 
-	public IEnumerator CheckForComplete()
-	{
-		while(Complete == false)
-		{
-			Complete = true;
-			for(int j = Height - 1; j >= 0; j--)
-			{
-				for(int i = 0; i < Width; i++)
-				{
-					if(TileDisplayArray[i,j].GetComponent<ST_PuzzleTile>().CorrectLocation == false)  
-					{
-						Complete = false;
-					}
-				}
-			}
+        if (CheckMoveUp(Xpos, Ypos, thisTile) != thisTile)
+        {
+            return CheckMoveUp(Xpos, Ypos, thisTile);
+        }
 
-			yield return null;
-		}
-				
-		// Depues de ganar
-		if(Complete)
-		{
-			Debug.Log("Puzzle Complete!");
+        return thisTile;
+    }
+
+    private ST_PuzzleTile GetTileAtThisGridLocation(int x, int y, ST_PuzzleTile thisTile)
+    {
+        for (int j = Height - 1; j >= 0; j--)
+        {
+            for (int i = 0; i < Width; i++)
+            {
+                if ((TileDisplayArray[i, j].GetComponent<ST_PuzzleTile>().GridLocation.x == x) &&
+                   (TileDisplayArray[i, j].GetComponent<ST_PuzzleTile>().GridLocation.y == y))
+                {
+                    if (TileDisplayArray[i, j].GetComponent<ST_PuzzleTile>().Active == false)
+                    {
+                        return TileDisplayArray[i, j].GetComponent<ST_PuzzleTile>();
+                    }
+                }
+            }
+        }
+
+        return thisTile;
+    }
+
+    private IEnumerator JugglePuzzle()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        // ocultar una pieza
+        TileDisplayArray[0, 0].GetComponent<ST_PuzzleTile>().Active = false;
+
+        yield return new WaitForSeconds(1.0f);
+
+        for (int k = 0; k < 20; k++)
+        {
+            // posicionar random cada pieza
+            for (int j = 0; j < Height; j++)
+            {
+                for (int i = 0; i < Width; i++)
+                {
+                    TileDisplayArray[i, j].GetComponent<ST_PuzzleTile>().ExecuteAdditionalMove();
+
+                    yield return new WaitForSeconds(0.02f);
+                }
+            }
+        }
+
+        StartCoroutine(CheckForComplete());
+
+        yield return null;
+    }
+
+    public IEnumerator CheckForComplete()
+    {
+        while (Complete == false)
+        {
+            Complete = true;
+            for (int j = Height - 1; j >= 0; j--)
+            {
+                for (int i = 0; i < Width; i++)
+                {
+                    if (TileDisplayArray[i, j].GetComponent<ST_PuzzleTile>().CorrectLocation == false)
+                    {
+                        Complete = false;
+                    }
+                }
+            }
+
+            yield return null;
+        }
+
+        // Depues de ganar
+        if (Complete)
+        {
+            Debug.Log("Puzzle Complete!");
             SceneManager.LoadSceneAsync(1);
         }
 
-		yield return null;
-	}
+        yield return null;
+    }
 
-	private Vector2 ConvertIndexToGrid(int index)
-	{
-		int WidthIndex = index;
-		int HeightIndex = 0;
+    private Vector2 ConvertIndexToGrid(int index)
+    {
+        int WidthIndex = index;
+        int HeightIndex = 0;
 
-		for(int i = 0; i < Height; i++)
-		{
-			if(WidthIndex < Width)
-			{
-				return new Vector2(WidthIndex, HeightIndex);
-			}
-			else
-			{
-				WidthIndex -= Width;
-				HeightIndex++;
-			}
-		}
+        for (int i = 0; i < Height; i++)
+        {
+            if (WidthIndex < Width)
+            {
+                return new Vector2(WidthIndex, HeightIndex);
+            }
+            else
+            {
+                WidthIndex -= Width;
+                HeightIndex++;
+            }
+        }
 
-		return new Vector2(WidthIndex, HeightIndex);
-	}
+        return new Vector2(WidthIndex, HeightIndex);
+    }
 
-	private void CreatePuzzleTiles()
-	{
-		TileDisplayArray = new GameObject[Width,Height];
+    private void CreatePuzzleTiles()
+    {
+        TileDisplayArray = new GameObject[Width, Height];
 
-		Scale = new Vector3(1.0f/Width, 1.0f, 1.0f/Height);
-		Tile.transform.localScale = Scale;
+        Scale = new Vector3(1.0f / Width, 1.0f, 1.0f / Height);
+        Tile.transform.localScale = Scale;
 
-		int TileValue = 0;
+        int TileValue = 0;
 
-		for(int j = Height - 1; j >= 0; j--)
-		{
-			for(int i = 0; i < Width; i++)
-			{
-				Position = new Vector3(((Scale.x * (i + 0.5f))-(Scale.x * (Width/2.0f))) * (10.0f + SeperationBetweenTiles), 
-				                       0.0f, 
-				                      ((Scale.z * (j + 0.5f))-(Scale.z * (Height/2.0f))) * (10.0f + SeperationBetweenTiles));
+        for (int j = Height - 1; j >= 0; j--)
+        {
+            for (int i = 0; i < Width; i++)
+            {
+                Position = new Vector3(((Scale.x * (i + 0.5f)) - (Scale.x * (Width / 2.0f))) * (10.0f + SeperationBetweenTiles),
+                                       0.0f,
+                                      ((Scale.z * (j + 0.5f)) - (Scale.z * (Height / 2.0f))) * (10.0f + SeperationBetweenTiles));
 
-				DisplayPositions.Add(Position);
+                DisplayPositions.Add(Position);
 
-				TileDisplayArray[i,j] = Instantiate(Tile, new Vector3(0.0f, 0.0f, 0.0f) , Quaternion.Euler(90.0f, -180.0f, 0.0f)) as GameObject;
-				TileDisplayArray[i,j].gameObject.transform.parent = this.transform;
+                TileDisplayArray[i, j] = Instantiate(Tile, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.Euler(90.0f, -180.0f, 0.0f)) as GameObject;
+                TileDisplayArray[i, j].gameObject.transform.parent = this.transform;
 
-				ST_PuzzleTile thisTile = TileDisplayArray[i,j].GetComponent<ST_PuzzleTile>();
-				thisTile.ArrayLocation = new Vector2(i,j);
-				thisTile.GridLocation = new Vector2(i,j);
-				thisTile.LaunchPositionCoroutine(Position);
-				TileValue++;
+                ST_PuzzleTile thisTile = TileDisplayArray[i, j].GetComponent<ST_PuzzleTile>();
+                thisTile.ArrayLocation = new Vector2(i, j);
+                thisTile.GridLocation = new Vector2(i, j);
+                thisTile.LaunchPositionCoroutine(Position);
+                TileValue++;
 
-				Material thisTileMaterial = new Material(PuzzleShader);
+                Material thisTileMaterial = new Material(PuzzleShader);
 
-				thisTileMaterial.mainTexture = PuzzleImage;
-					
-				thisTileMaterial.mainTextureOffset = new Vector2(1.0f/Width * i, 1.0f/Height * j);
-				thisTileMaterial.mainTextureScale  = new Vector2(1.0f/Width, 1.0f/Height);
-					
-				TileDisplayArray[i,j].GetComponent<Renderer>().material = thisTileMaterial;
-			}
-		}
+                thisTileMaterial.mainTexture = PuzzleImage;
 
-	}
+                thisTileMaterial.mainTextureOffset = new Vector2(1.0f / Width * i, 1.0f / Height * j);
+                thisTileMaterial.mainTextureScale = new Vector2(1.0f / Width, 1.0f / Height);
+
+                TileDisplayArray[i, j].GetComponent<Renderer>().material = thisTileMaterial;
+            }
+        }
+
+    }
 }

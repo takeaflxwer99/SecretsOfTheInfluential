@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-
     public GameObject pauseMenu;
     public bool isPaused;
     public AudioMixer mixer;
@@ -14,9 +13,7 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         pauseMenu.SetActive(false);
-
     }
 
     // Update is called once per frame
@@ -33,7 +30,6 @@ public class PauseMenu : MonoBehaviour
                 PauseGame();
             }
         }
-
     }
 
     public void PauseGame()
@@ -54,6 +50,8 @@ public class PauseMenu : MonoBehaviour
 
     public void GoToMainMenu()
     {
+
+        SaveData saveData = SaveManager.LoadGameState();
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
@@ -62,5 +60,4 @@ public class PauseMenu : MonoBehaviour
     {
         Application.Quit();
     }
-    
 }
